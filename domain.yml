@@ -1,0 +1,135 @@
+intents:
+  - greet
+  - goodbye
+  - inform_no_rooms
+  - inform_room_type
+  - inform_time_clean
+  - book_room
+  - thanks
+  - clean_room
+  - out_of_scope:
+      triggers: action_out_of_scope
+  - inquire_check_in:
+      triggers: action_check_in
+  - inquire_check_out:
+      triggers: action_check_out
+  - inquire_cancel_reservation:
+      triggers: action_cancel_reservation
+  - inquire_cancellation_policy:
+      triggers: action_cancellation_policy
+  - inquire_restaurant:
+      triggers: action_restaurant
+  - inquire_breakfast_availability:
+      triggers: action_breakfast_availability
+  - inquire_breakfast_timings:
+      triggers: action_breakfast_timings
+  - inquire_restaurant_timings:
+      triggers: action_restaurant_timings
+
+entities:
+  - no_rooms
+  - type_room
+  - clean_time
+
+slots:
+  no_rooms:
+    type: categorical
+    values:
+    - 1
+    - 2
+  
+  type_room:
+    type: categorical
+    values:
+    - simple
+    - deluxe
+  
+  clean_time:
+    type: text
+
+actions:
+- utter_greet
+- utter_goodbye
+- utter_no_of_rooms
+- utter_room_type
+- utter_room_confirmation
+- utter_arrange_cleaning
+- utter_welcome
+- utter_check_in
+- utter_check_out
+- utter_cancel_reservation
+- utter_cancellation_policy
+- utter_restaurant
+- utter_breakfast_availability
+- utter_breakfast_timings
+- utter_restaurant_timings
+- action_set_rooms
+- action_room_type
+- action_book_clean_time
+- action_check_in
+- action_check_out
+- action_cancel_reservation
+- action_cancellation_policy
+- action_restaurant
+- action_breakfast_availability
+- action_breakfast_timings
+- action_restaurant_timings
+- action_out_of_scope
+
+responses:
+  utter_greet:
+  - text: "Hi, I am Mini-the chatbot. I can help you with your reservations, room cleaning and other basic facilities. How may I help you?"
+  
+  utter_goodbye:
+  - text: "Thank you for your time. Enjoy your day!"
+  
+  utter_no_of_rooms:
+  - text: "How many rooms would you like to book?"
+
+  utter_room_type:
+  - text: "What type of room would you want to book?"
+    buttons:
+    - title: "Simple"
+      payload: '/inform_room_type{"type_room": "simple"}'
+    - title: "Deluxe"
+      payload: '/inform_room_type{"type_room": "deluxe"}'
+
+  utter_room_confirmation:
+  - text: "You have chosen to book {no_rooms} {type_room} room(s)."
+  
+  utter_arrange_cleaning:
+  - text: "When should I arrange for a cleaning?"
+
+  utter_welcome:
+  - text: "You are welcome!"
+
+  utter_check_in:
+  - text: "Check-in time starts at 4 PM. Minimum check-in age is 21. Please contact the reception for early check-in requests."
+
+  utter_check_out:
+  - text: "Check-out time is 11 AM. Please contact the reception for late checkout requests."
+
+  utter_cancel_reservation:
+  - text: "To cancel a reservation, select the “Reservations” link from the homepage.\n On the Reservations page, under the heading ‘View, Change or Cancel a Reservation,’ enter your confirmation number, and either the last name on the reservation or the last four digits of the credit card used to make the reservation."
+  
+  utter_cancellation_policy:
+  - text: " The booking deposit is refundable if the cancellation occurs at least 15 days before arrival. For cancellations made after this limit, a penalty will be imposed based on the cancellation policy."
+   
+  utter_restaurant:
+  - text: "Yes, the hotel has a restaurant called the Zephyr Bar. With our menu we strive to reflect the historic art and the spirit of our neighborhood by offering a glimpse into what makes our area unique."
+
+  utter_breakfast_availability:
+  - text: "The hotel provides its guests with a free made-to-order breakfast each morning."
+
+  utter_breakfast_timings:
+  - text: "Monday through Friday breakfast is 6 am to 9 am. On Saturday and Sunday, we are open from 7 am to 10:30 am."
+
+  utter_restaurant_timings:
+  - text: "Our restaurant serves a dazzling 24-hour menu."
+
+  utter_out_of_scope:
+  - text: "Sorry. I did not understand you. Could you elaborate yourself?"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
