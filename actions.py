@@ -21,7 +21,7 @@ def get_last_utter_action(tracker):
         try:
             if event.get('name') == 'utter_room_confirmation':
                 return
-            if event.get('name') in ['utter_no_of_rooms','utter_room_type']:
+            elif event.get('name') in ['utter_no_of_rooms','utter_room_type']:
                 return event.get('name')
         except:
             continue
